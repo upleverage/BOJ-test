@@ -33,3 +33,4 @@ while queue: # 큐 자료가 있으면 계속 반복
 print(check[n-1][m-1])
 
 # 튜플 자료형을 활용하면 iteration을 더 빨리 돌릴 수 있다.
+# sys.stdin.readlint().rsplit() 함수 활용
