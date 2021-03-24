@@ -1,0 +1,43 @@
+# 알고스팟 / BFS 알고리즘
+
+# * 풀이해결 아이디어
+# 가중치는 벽을 부순 횟수와 같다.
+# 0->0 가중치:0
+# 0->1 가중치:1
+# 1->1 가중치:1
+
+# 즉, 덱을 이용하여 가중치가 0일 때는, appendleft
+# 가중치가 1일 때는 append 하면
+# 벽을 최소로 부수는 개수를 찾을 수 있다.
+
+# 덱 라이브러리 불러오기, BFS에서는 큐 자료구조를 활용한다.
+from collections import deque
+# n, m 입력
+n, m = map(int, input().split())
+# 지도 입력 받기
+matrix = [list(map(int, input())) for i in range(n)]
+# 빈도 체크 매트릭스 만들기
+check = [[-1] * m for _ in range(n)]
+check[0][0] = 0 # 첫번째 칸은 0 으로 두기
+#BFS를 실시하기 위한 큐 자료구조를 생성한다.
+queue = deque()
+queue.append([0,0])
+# 이동 매트릭스 지정
+dx, dy = [1,-1,0,0], [0,0,1,-1]
+
+while queue: # 큐 자료가 있으면 계속 반복
+    x, y = queue.popleft() # 큐에서 가장 왼쪽부터 FIFO, 현재위치 지정
+    
+    for i in range(4): # 4방향 돌기 위한 for 문
+        nx, ny = x + dx[i], y + dy[i] # 이동위치
+        if 0 <= nx < n and 0 <= ny < m: # 이동위치가 지도를 넘지 않음
+            if check[nx][ny] == -1: # 이동하려는 위치가 아직 방문하지 않은경우
+                if matrix[nx][ny] == 1: # 지도에서 벽이 있는 경우
+                    check[nx][ny] = check[x][y] + 1 #이동 전 위치에서 벽깬 횟수 +1
+                    queue.append([nx,ny]) # 이동한 위치를 큐에 추가
+                else: # 벽이 없는 경우
+                    check[nx][ny] = check[x][y] #이동 전 위치까지 벽깬 횟수와 동일
+                    queue.appendleft([nx,ny]) # 이동한 위치를 큐에 추가
+                    #left에 추가하는 이유는 벽이 없는 경우를 먼저 방문해 check에 표시하기 위함.
+                    
+print(check[n-1][m-1])
