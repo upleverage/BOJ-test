@@ -1,0 +1,18 @@
+import sys
+stackleft = list(sys.stdin.readline().rstrip())
+stackright = []
+
+n = int(sys.stdin.readline())
+
+for _ in range(n):
+  com = list(sys.stdin.readline().rstrip().split())
+  if com[0] == 'L' and stackleft:
+    stackright.append(stackleft.pop())
+  if com[0] == 'D' and stackright:
+    stackleft.append(stackright.pop())
+  if com[0] == 'B' and stackleft:
+    stackleft.pop()
+  if com[0] == 'P':
+    stackleft.append(com[1])
+
+print(''.join(stackleft) + ''.join(reversed(stackright)))
