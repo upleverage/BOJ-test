@@ -1,0 +1,10 @@
+N, K = map(int, input().split())
+lst = list(range(1,N+1))
+popnum = 0
+answer = []
+
+for _ in range(N):
+  popnum = (popnum + K-1) % len(lst)
+  answer.append(str(lst.pop(popnum)))
+
+print('<' + ', '.join(answer) + '>')
