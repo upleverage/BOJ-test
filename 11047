@@ -1,0 +1,15 @@
+N, K = map(int, input().split())
+
+lst = []
+for _ in range(N):
+    a = int(input())
+    lst.append(a)
+
+lst.reverse()
+
+count = 0
+for i in lst:
+    count += K // i
+    K = K % i
+    
+print(count)

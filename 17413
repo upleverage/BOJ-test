@@ -1,0 +1,28 @@
+s, temp, result = input(), '', ''
+tag = False
+
+for i in s:
+    if i == '<':
+        tag = True
+        result += temp[::-1] + i
+        temp = ''
+        
+    elif i == '>':
+        tag = False
+        result += i
+        
+    elif i == ' ':
+        if tag:
+            result += i
+        else:
+            result += temp[::-1] + i
+            temp = ''
+        
+    else:
+        if tag:
+            result += i
+        else:
+            temp += i
+            
+result += temp[::-1]
+print(result)

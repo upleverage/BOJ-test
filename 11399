@@ -1,0 +1,9 @@
+n = int(input())
+lst = list(map(int,input().split()))
+lst.sort(reverse=True)
+
+sum = 0
+for i in range(n):
+    sum += lst[i]*(i+1)
+    
+print(sum)
