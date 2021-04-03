@@ -1,0 +1,25 @@
+n = int(input())
+stack = []
+result = []
+count = 0
+tf_check = 1
+
+for _ in range(n):
+    x = int(input())
+    
+    while count < x:
+        count += 1
+        stack.append(count)
+        result.append('+')
+    
+    if stack[-1] == x:
+        stack.pop()
+        result.append('-')
+    
+    else:
+        tf_check = False
+
+if tf_check == False:
+    print('NO')
+else:
+    print('\n'.join(result))

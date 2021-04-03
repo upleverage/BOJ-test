@@ -1,0 +1,30 @@
+n, m = map(int, input().split())
+graph = [[] for _ in range(n)]
+visited = [0] * n
+
+#그래프 받아오기
+for _ in range(m):
+    x, y = map(int, input().split())
+    graph[x].append(y)
+    graph[y].append(x)
+
+#DFS 함수 정의하기
+def dfs(start, depth):
+    global check
+    visited[start] = 1
+    if depth == 4:
+        check = 1
+        return
+    for j in graph[start]:
+        if not visited[j]:
+            dfs(j, depth + 1)
+            visited[j] = False
+
+check = 0 #숫자 정의해주기
+#방문체크하기
+for i in range(n):
+    dfs(i, 0)
+    visited[i] = False
+    if check:
+        break
+print(1 if check else 0)
