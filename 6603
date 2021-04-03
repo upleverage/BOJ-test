@@ -1,0 +1,13 @@
+from itertools import combinations
+
+lst = list(map(int, input().split()))
+
+while lst[0] != 0:
+    lst.pop(0)
+    p = combinations(lst, 6)
+    for i in p:
+        for j in range(6):
+            print(i[j], end=' ')
+        print()
+    print()
+    lst = list(map(int, input().split()))
